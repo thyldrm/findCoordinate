@@ -1,13 +1,22 @@
 var body1 = document.querySelector("#body1");
 var time = document.querySelector("#time");
+var btnClick = document.querySelector("#start");
 
 eventListeners();
 
 function eventListeners(){
-    body1.addEventListener("click",find)
+    body1.addEventListener("click",find);
+    btnClick.addEventListener("click",runTimer);
 }
 
+var reset;
 var sayac=1;
+
+function runTimer(event) {
+    reset = setInterval(timer,1000)
+    btnClick.disabled=true;
+    event.stopPropagation();
+}
 
 function timer(){
     time.innerHTML=sayac;
@@ -36,7 +45,7 @@ needFind.innerHTML=`Bulmanız gereken X koordinatı = ${a}`;
 
       if(a===event.pageX){
           console.log("You win")
-          clearInterval(zamanlayici);
+          clearInterval(reset);
           congrats.innerHTML=`TEBRİKLER ${sayac-1} SANİYEDE BULDUNUZ`
 
       }else {
